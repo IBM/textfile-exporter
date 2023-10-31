@@ -1,0 +1,11 @@
+[Unit]
+Description=Textfile exporter, reads prom files and exposes on socket
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/textfile-exporter -p /var/local/lib/textfile_exporter -i 5s -l 9014 -o 1m -x "/var/local/lib/textfile_exporter/0_oldprom.sh {}"
+User=textfile_exporter
+
+[Install]
+WantedBy=multi-user.target
