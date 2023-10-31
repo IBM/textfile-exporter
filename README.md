@@ -5,7 +5,6 @@ Useful when you have prometheus metrics entries in one (or more) textual files a
 A typical use case is when exporting results of cronjobs or other processes that just exit after executing their task and/or are not able to export metrics directly on a socket.
 
 ## Usage
-
 The process is expected to run as a daemon; a systemd unit file is included as an example.
 
 The specified directory will be continuously monitored for `*.prom` files and all metrics included in them will be gathered. When a HTTP GET request is received on the specified tcp port (and `/metrics` endpoint), the metrics are emitted for grabbing.
@@ -71,6 +70,6 @@ to configure
 
 ## Advanced features
 ### live debug
-If you want to enable debug mode on a running process you can just create a file called `debug_tfe` in the monitored path (`touch /myproject/metrics/debug_fte`). The presence of this file will trigger debug output until the file gets removed; the file will be ignored if it is older than two hours so to automatically interrupt a forgotten debug session that may cause large debug output in logs. This feature is useful when stopping and restarting the service may be inconvenient (e.g. running inside a container setup).
+If you want to enable debug mode on a running process you can just create a file called `debug_tfe` in the monitored path (`touch /myproject/metrics/debug_tfe`). The presence of this file will trigger debug output until the file gets removed; the file will be ignored if it is older than two hours so to automatically interrupt a forgotten debug session that may cause large debug output in logs. This feature is useful when stopping and restarting the service may be inconvenient (e.g. running inside a container setup).
 ### liveness endpoint
 An HTTP GET to the `/alive` endpoint can be used to check if the daemon is running and operating correctly. This may be useful in a container setup to trigger remediations (automatic restart) without hitting the `/metrics` endpoint that would produce output we do not actually need to get.
