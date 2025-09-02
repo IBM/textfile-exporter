@@ -7,7 +7,7 @@ toolchain go1.25.0
 require (
 	github.com/prometheus/client_golang v1.23.0
 	github.com/prometheus/client_model v0.6.2
-	github.com/prometheus/common v0.65.0
+	github.com/prometheus/common v1.20.3
 )
 
 require (
