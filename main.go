@@ -16,6 +16,8 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	dto "github.com/prometheus/client_model/go"
 	"github.com/prometheus/common/expfmt"
+    "github.com/prometheus/common/model"
+
 )
 
 func fatal(err error) {
@@ -42,7 +44,7 @@ func parseMF(path string) (map[string]*dto.MetricFamily, error) {
 	}
 
 	// We parse the content to return the metrics family result.
-	var parser expfmt.TextParser
+	parser := expfmt.NewTextParser(model.UTF8Validation)
 	mf, err := parser.TextToMetricFamilies(reader)
 	if err != nil {
 		return nil, err
@@ -64,6 +66,7 @@ func main() {
 	optMemoryMaxAge := flag.Duration("m", 25*time.Hour, "max age of in memory metrics")
 	optOldFilesAge := flag.Duration("o", 6*time.Hour, "min age of files considered old")
 	optOldFilesExternalCmd := flag.String("x", "ls -l {}", "external command executed on old files")
+
 
 	flag.Usage = func() {
 		flag.PrintDefaults()
