@@ -2,7 +2,7 @@ module textfile-exporter
 
 go 1.24.0
 
-toolchain go1.26.2
+toolchain go1.26.5
 
 require (
 	github.com/prometheus/client_golang v1.23.2
